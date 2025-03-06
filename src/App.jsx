@@ -10,7 +10,8 @@ function App() {
         <Header/>
         <Hero />
       </div>
-      <Companies />
+{/*       <Companies /> */}
+      <h1>hello</h1>
     </span>
   );
 }
