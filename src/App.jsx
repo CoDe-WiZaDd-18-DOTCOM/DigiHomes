@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./components/head/head";
 import Hero from "./components/hero/hero";
+import Companies from "./components/companies/companies";
 function App() {
   return (
     <span>
@@ -9,6 +10,7 @@ function App() {
         <Header/>
         <Hero />
       </div>
+      <Companies />
     </span>
   );
 }
