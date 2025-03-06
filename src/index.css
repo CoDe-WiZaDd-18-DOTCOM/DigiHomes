@@ -97,6 +97,20 @@ a {
   transform: scale(1.1);
 }
 
+.main-wrapper{
+  background-color: var(--black);
+  position: relative;
+}
+
+.white-gra{
+  position: absolute;
+  background: rgb(255, 255, 255,0.522);
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  filter: blur(100px);
+}
+
 /* media queries */
 @media (min-width: 1536px) {
   .innerWidth {
