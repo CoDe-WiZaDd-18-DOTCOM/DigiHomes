@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./components/head/head";
 import Hero from "./components/hero/hero";
 import Companies from "./components/companies/companies";
+import Residencies from "./components/residencies/residencies";
 function App() {
   return (
     <span>
@@ -10,8 +11,8 @@ function App() {
         <Header/>
         <Hero />
       </div>
-{/*       <Companies /> */}
-      <h1>hello</h1>
+      <Companies />
+      <Residencies />
     </span>
   );
 }
