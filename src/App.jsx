@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "./components/head/head";
-import Hero from "./components/hero/hero";
-import Companies from "./components/companies/companies";
-import Residencies from "./components/residencies/residencies";
+import Header from "./components/Head/Head";
+import Hero from "./components/Hero/Hero";
+import Companies from "./components/Companies/Companies";
+import Residencies from "./components/Residencies/Residencies";
 function App() {
   return (
     <span>
