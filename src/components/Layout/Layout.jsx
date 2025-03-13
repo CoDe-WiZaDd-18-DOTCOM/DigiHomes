@@ -7,8 +7,8 @@ import UserDetailContext from "../../context/UserDetailContext";
 // TODO: Remove Node.js-specific hooks and replace with Spring Boot API calls
 // import { useMutation } from "react-query";
 // import { createUser } from "../../utils/api";
-// import useFavourites from "../../hooks/useFavourites";
-// import useBookings from "../../hooks/useBookings";
+import useFavourites from "../../hooks/useFavourites";
+import useBookings from "../../hooks/useBookings";
 
 const Layout = () => {
   // TODO: Implement these functionalities using Spring Boot APIs

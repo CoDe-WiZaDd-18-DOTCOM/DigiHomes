@@ -3,12 +3,48 @@ import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import "./Residencies.css";
 import { sliderSettings } from "../../utils/common";
-import data from "../../utils/slider.json"
-// import PropertyCard from "../PropertyCard/PropertyCard";
-// import useProperties from "../../hooks/useProperties";
-// import {PuffLoader} from 'react-spinners'
+import PropertyCard from "../PropertyCard/PropertyCard";
+import useProperties from "../../hooks/useProperties";
+import { PuffLoader } from "react-spinners";
 
 const Residencies = () => {
+  // Fetching properties from backend (Spring Boot API)
+  const { data, isError, isLoading } = useProperties();
+
+  // Dummy data (Replace with API response)
+  const dummyData = [
+    {
+      id: 1,
+      image: "https://via.placeholder.com/300",
+      price: 250000,
+      title: "Modern Apartment",
+      description: "A beautiful modern apartment in a prime location.",
+    },
+    {
+      id: 2,
+      image: "https://via.placeholder.com/300",
+      price: 180000,
+      title: "Cozy House",
+      description: "A cozy and affordable house with great amenities.",
+    },
+  ];
+
+  if (isError) {
+    return (
+      <div className="wrapper">
+        <span>Error while fetching data</span>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="wrapper flexCenter" style={{ height: "60vh" }}>
+        <PuffLoader height="80" width="80" radius={1} color="#4066ff" aria-label="puff-loading" />
+      </div>
+    );
+  }
+
   return (
     <div id="residencies" className="r-wrapper">
       <div className="paddings innerWidth r-container">
@@ -18,20 +54,10 @@ const Residencies = () => {
         </div>
         <Swiper {...sliderSettings}>
           <SlideNextButton />
-          {/* slider */}
-          {data.slice(0, 8).map((card, i) => (
+          {/* Render property cards from API or dummy data */}
+          {(data?.length ? data.slice(0, 8) : dummyData).map((card, i) => (
             <SwiperSlide key={i}>
-              <div className="flexColStart r-card">
-                <img src={card.image} alt="" />
-
-                <span className="secondaryText r-price">
-                    <span style={{color:"orange"}}>$</span>
-                    <span>{card.price}</span>
-                </span>
-
-                <span className="primaryText">{card.name}</span>
-                <span className="secondaryText">{card.detail}</span>
-              </div>
+              <PropertyCard card={card} />
             </SwiperSlide>
           ))}
         </Swiper>

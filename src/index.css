@@ -16,6 +16,9 @@
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
 }
+.wrapper{
+  background-color: white;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -82,35 +85,6 @@ a {
   font-weight: 600;
 }
 
-.button{
-  font-weight: 500;
-  color: white;
-  background: var(--blue-gradient);
-  padding: 0.8rem 1.6rem;
-  border: none;
-  border-radius: 4px;
-  transition: all 300ms ease-in;
-}
-
-.button:hover{
-  cursor: pointer;
-  transform: scale(1.1);
-}
-
-.main-wrapper{
-  background-color: var(--black);
-  position: relative;
-}
-
-.white-gra{
-  position: absolute;
-  background: rgb(255, 255, 255,0.522);
-  width: 20rem;
-  height: 20rem;
-  border-radius: 50%;
-  filter: blur(100px);
-}
-
 /* media queries */
 @media (min-width: 1536px) {
   .innerWidth {
@@ -138,4 +112,18 @@ a {
   .orangeText {
     font-size: 1.2rem;
   }
+}
+
+.button {
+  font-weight: 500;
+  padding: 0.6rem 1.4rem;
+  color: white;
+  background: var(--blue-gradient);
+  border: none;
+  border-radius: 4px;
+  transition: all 300ms ease-in;
+}
+.button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
