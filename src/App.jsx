@@ -13,6 +13,7 @@ import Property from "./pages/Property/Property";
 import UserDetailContext from "./context/UserDetailContext";
 import Bookings from "./pages/Bookings/Bookings";
 import Favourites from "./pages/Favourites/Favourites";
+import Profile from "./components/Header/Dash";
 
 function App() {
   const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ function App() {
         <BrowserRouter>
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
+            <Route path="/dash" element={<Profile />} />
               <Route element={<Layout />}>
                 <Route path="/" element={<Website />} />
                 <Route path="/properties">
