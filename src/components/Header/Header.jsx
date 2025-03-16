@@ -16,7 +16,7 @@ const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const headerColor = useHeaderColor();
   const [modalOpened, setModalOpened] = useState(false);
-  const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, user, logout, isLoading  } = useAuth0();
   const { validateLogin } = useAuthCheck();
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const Header = () => {
     <section className="h-wrapper" style={{ background: headerColor }}>
       <div className="flexCenter innerWidth paddings h-container">
         {/* logo */}
-        <Link to="/">
+        <Link to="">
           <img src="./logo.png" alt="logo" width={150} />
         </Link>
 
@@ -50,19 +50,22 @@ const Header = () => {
 
             {/* add property */}
             <div onClick={handleAddPropertyClick}>Add Property</div>
-            {console.log(isAuthenticated)}
+            {console.log("Auth0 Hook Output:", { isAuthenticated, user, isLoading })}
             <AddPropertyModal opened={modalOpened} setOpened={setModalOpened} />
             {/* login button */}
 
             
             
             {!isAuthenticated ? (
-              <button className="button" onClick={loginWithRedirect}>
-                Login
-              </button>
+              <>
+                {console.log("Rendering Login Button")}
+                <button className="button" onClick={loginWithRedirect}>Login</button>
+              </>
             ) : (
-              <ProfileMenu user={user} logout={logout} />
-              
+              <>
+                {console.log("Rendering ProfileMenu", user)}
+                <ProfileMenu user={user} logout={logout} />
+              </>
             )}
           </div>
         </OutsideClickHandler>

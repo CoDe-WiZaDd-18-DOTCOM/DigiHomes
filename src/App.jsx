@@ -14,6 +14,8 @@ import UserDetailContext from "./context/UserDetailContext";
 import Bookings from "./pages/Bookings/Bookings";
 import Favourites from "./pages/Favourites/Favourites";
 import Profile from "./components/Header/Dash";
+import "@mantine/core/styles.css";
+
 
 function App() {
   const queryClient = new QueryClient();

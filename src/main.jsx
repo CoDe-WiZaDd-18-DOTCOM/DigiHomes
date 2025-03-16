@@ -14,6 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       redirect_uri: window.location.origin, 
       audience: "https://localhost:5000/user",
     }}
+    cacheLocation="localstorage"
   >
     <MantineProvider>
       <App />

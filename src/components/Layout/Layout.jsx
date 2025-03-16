@@ -23,7 +23,7 @@ const Layout = () => {
       try {
         const res = await getAccessTokenWithPopup({
           authorizationParams: {
-            audience: "http://localhost:8080", // TODO: Update with Spring Boot backend URL
+            audience: "https://localhost:5000/user", // TODO: Update with Spring Boot backend URL
             scope: "openid profile email",
           },
         });
