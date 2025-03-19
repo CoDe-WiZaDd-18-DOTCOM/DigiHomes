@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import "./UploadImage.css";
 import { Button, Group } from "@mantine/core";
+import { cloudinary_name, cloudinary_uploadPresent } from "../../services/Helper";
 
 const UploadImage = ({ propertyDetails, setPropertyDetails, nextStep, prevStep }) => {
   // Dummy image URL (Replace with actual uploaded image URL)
@@ -17,11 +18,16 @@ const UploadImage = ({ propertyDetails, setPropertyDetails, nextStep, prevStep }
   };
 
   useEffect(() => {
+    if (!window.cloudinary) {
+      console.error("Cloudinary script not loaded");
+      return;
+    }
+  
     cloudinaryRef.current = window.cloudinary;
     widgetRef.current = cloudinaryRef.current.createUploadWidget(
       {
-        cloudName: "dcdhklrjc", // Replace with your Cloudinary cloud name
-        uploadPreset: "vx0dyjgc", // Replace with your Cloudinary upload preset
+        cloudName: cloudinary_name, 
+        uploadPreset: cloudinary_uploadPresent,
         maxFiles: 1,
       },
       (err, result) => {
@@ -31,6 +37,7 @@ const UploadImage = ({ propertyDetails, setPropertyDetails, nextStep, prevStep }
       }
     );
   }, []);
+  
 
   return (
     <div className="flexColCenter uploadWrapper">

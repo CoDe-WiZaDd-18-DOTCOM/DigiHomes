@@ -29,7 +29,7 @@ const Header = () => {
     <section className="h-wrapper" style={{ background: headerColor }}>
       <div className="flexCenter innerWidth paddings h-container">
         {/* logo */}
-        <Link to="">
+        <Link to="/">
           <img src="./logo.png" alt="logo" width={150} />
         </Link>
 

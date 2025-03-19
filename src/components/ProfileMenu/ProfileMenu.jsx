@@ -7,7 +7,7 @@ import { SignUpRoute } from "../../services/apis_routes";
 
 const ProfileMenu = ({ user, logout }) => {
   const navigate = useNavigate();
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0(); // Removed user2
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0(); 
 
   useEffect(() => {
     const registerUser = async () => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Accordion,
   AccordionItem,
@@ -13,8 +13,7 @@ import data from "../../utils/accordion.jsx";
 import "./Value.css";
 
 const Value = () => {
-  // State for tracking expanded/collapsed items
-  const [expandedItems, setExpandedItems] = useState(Array(data.length).fill(false));
+  console.log("Rendering Value component...");
 
   return (
     <section id="value" className="v-wrapper">
@@ -38,27 +37,20 @@ const Value = () => {
 
           <Accordion className="accordion" allowMultipleExpanded={false} preExpanded={[0]}>
             {data.map((item, i) => (
-              <AccordionItem
-                key={i}
-                uuid={i}
-                className={`accordionItem ${expandedItems[i] ? "expanded" : "collapsed"}`}
-              >
+              <AccordionItem key={i} uuid={i} className="accordionItem">
                 <AccordionItemHeading>
                   <AccordionItemButton className="flexCenter accordionButton">
                     <AccordionItemState>
-                      {({ expanded }) => {
-                        // Update the expanded state for this item
-                        const newExpandedItems = [...expandedItems];
-                        newExpandedItems[i] = expanded;
-                        setExpandedItems(newExpandedItems);
-                      }}
+                      {({ expanded }) => (
+                        <>
+                          <div className="flexCenter icon">{item.icon}</div>
+                          <span className="primaryText">{item.heading}</span>
+                          <div className={`flexCenter icon ${expanded ? "expanded" : "collapsed"}`}>
+                            <MdOutlineArrowDropDown size={20} />
+                          </div>
+                        </>
+                      )}
                     </AccordionItemState>
-
-                    <div className="flexCenter icon">{item.icon}</div>
-                    <span className="primaryText">{item.heading}</span>
-                    <div className="flexCenter icon">
-                      <MdOutlineArrowDropDown size={20} />
-                    </div>
                   </AccordionItemButton>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
