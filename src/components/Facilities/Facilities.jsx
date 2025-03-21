@@ -1,5 +1,7 @@
 import { Box, Button, Group, NumberInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 import React from "react";
 
 const Facilities = ({
@@ -23,25 +25,43 @@ const Facilities = ({
   });
 
   const { bedrooms, parkings, bathrooms } = form.values;
+  const { user,isAuthenticated, getAccessTokenSilently } = useAuth0();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const { hasErrors } = form.validate();
     if (!hasErrors) {
-      setPropertyDetails((prev) => ({
-        ...prev,
-        facilities: { bedrooms, parkings, bathrooms },
-      }));
+      const updatedDetails = {
+        ...propertyDetails,
+        facilities: form.values,
+      };
       
-      // TODO: Send propertyDetails to the Spring Boot backend for saving.
-      // Example:
-      // fetch("http://localhost:8080/api/properties", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ ...propertyDetails, facilities: { bedrooms, parkings, bathrooms } }),
-      // })
-      //   .then(response => response.json())
-      //   .then(data => console.log(data))
-      //   .catch(error => console.error("Error:", error));
+      setPropertyDetails(updatedDetails);
+
+      if (!isAuthenticated) {
+        console.error("User is not authenticated.");
+        return;
+      }
+      console.log(propertyDetails);
+      try {
+        const token = await getAccessTokenSilently();
+        const response = await axios.post(
+          `http://localhost:5001/properties/${user.sub}`,
+          propertyDetails,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.status === 201) {
+          console.log("Property Created:", response.data);
+        } else {
+          console.warn("Unexpected response:", response.status, response.data);
+        }
+      } catch (error) {
+        console.error("Error registering property:", error);
+      }
 
       setOpened(false);
       setActiveStep(0);
