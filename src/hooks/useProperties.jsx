@@ -1,24 +1,37 @@
 import React, { useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
+import { PropertyRoute } from "../services/apis_routes";
+import { property } from "lodash";
 
 const useProperties = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const {getAccessTokenSilently} = useAuth0();
 
-  // Placeholder function for fetching properties from Spring Boot backend (to be implemented)
   const fetchProperties = async () => {
-    // TODO: Replace with actual API call to fetch properties from Spring Boot backend
-    // Example: Fetch data using Axios or Fetch API
-    // const response = await fetch("/api/properties");
-    // const data = await response.json();
+      try{
+        const token = await getAccessTokenSilently();
+        const response = await axios.get(
+            PropertyRoute,
+            {
+              headers:{
+                Authorization:`Bearer ${token}`,
+              },
+            },
+          );
+          console.log("Properties Fetched:", response.data);
+          if (response.status === 200) {
+            setData(response.data);
+          } else {
+            console.warn("Unexpected response:", response.status, response.data);
+          }
+      } catch (error) {
+        console.error("Error fetching property:", error);
+      }
 
-    const dummyData = [
-      { id: 1, name: "Luxury Apartment", location: "New York", price: "$500,000" },
-      { id: 2, name: "Beach House", location: "California", price: "$750,000" },
-      { id: 3, name: "Mountain Cabin", location: "Colorado", price: "$300,000" },
-    ];
-
-    setData(dummyData);
+    
     setIsLoading(false);
   };
 
@@ -29,7 +42,7 @@ const useProperties = () => {
 
   useEffect(() => {
     fetchProperties();
-  }, []);
+  }, [getAccessTokenSilently]);
 
   return { data, isError, isLoading, refetch };
 };

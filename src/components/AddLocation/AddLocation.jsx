@@ -10,10 +10,10 @@ const AddLocation = ({ propertyDetails, setPropertyDetails, nextStep }) => {
 
   const form = useForm({
     initialValues: {
-      country: propertyDetails?.country || "United States", // TODO: Replace with actual country data from the backend
-      city: propertyDetails?.city || "New York", // TODO: Replace with city data from the backend
-      state: propertyDetails?.state || "california" ,
-      address: propertyDetails?.address || "123 Main St", // TODO: Replace with address data from the backend
+      country: propertyDetails?.country , // TODO: Replace with actual country data from the backend
+      city: propertyDetails?.city, // TODO: Replace with city data from the backend
+      state: propertyDetails?.state ,
+      address: propertyDetails?.address, // TODO: Replace with address data from the backend
     },
 
     validate: {

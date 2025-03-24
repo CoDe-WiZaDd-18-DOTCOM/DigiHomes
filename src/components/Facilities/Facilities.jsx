@@ -54,7 +54,7 @@ const Facilities = ({
           }
         );
 
-        if (response.status === 201) {
+        if (response.status === 200) {
           console.log("Property Created:", response.data);
         } else {
           console.warn("Unexpected response:", response.status, response.data);

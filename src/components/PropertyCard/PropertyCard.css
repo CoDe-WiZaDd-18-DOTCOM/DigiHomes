@@ -15,11 +15,13 @@
     z-index: 1;
   }
   
-  .r-card > img {
-    width: 15rem;
-    height: 10rem;
-    border-radius: 10px;
-  }
+ 
+.r-card img {
+  width: 100%; 
+  height: 180px;
+  object-fit: cover; 
+  border-radius: 8px;
+}
   .r-card > :nth-child(3) {
     font-size: 1.2rem;
     font-weight: 600;
