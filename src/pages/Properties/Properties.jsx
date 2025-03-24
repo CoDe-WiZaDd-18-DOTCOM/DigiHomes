@@ -1,39 +1,17 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
+import useProperties from "../../hooks/useProperties";
 import { PuffLoader } from "react-spinners";
 import "./Properties.css";
 
 const Properties = () => {
-  const [data, setData] = useState([]); // Store property data
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
   const [filter, setFilter] = useState("");
 
-  // Placeholder function to fetch properties from Spring Boot
-  const fetchProperties = async () => {
-    try {
-      // TODO: Replace with actual API call to Spring Boot backend
-      // Example: const response = await fetch("/api/properties");
-      // const data = await response.json();
+  const { data, isError, isLoading } = useProperties();   
 
-      const dummyData = [
-        { id: 1, title: "Luxury Apartment", city: "New York", country: "USA" },
-        { id: 2, title: "Beach House", city: "Los Angeles", country: "USA" },
-        { id: 3, title: "Mountain Cabin", city: "Denver", country: "USA" },
-      ];
-
-      setData(dummyData);
-      setIsLoading(false);
-    } catch (error) {
-      setIsError(true);
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchProperties();
-  }, []);
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error loading properties.</p>;
 
   if (isError) {
     return (

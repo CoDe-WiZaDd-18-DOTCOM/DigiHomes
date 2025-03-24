@@ -85,6 +85,13 @@ a {
   font-weight: 600;
 }
 
+.img-ness {
+  width: 100%; 
+  height: 180px;
+  object-fit: cover; 
+  border-radius: 8px;
+}
+
 /* media queries */
 @media (min-width: 1536px) {
   .innerWidth {
