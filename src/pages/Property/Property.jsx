@@ -10,6 +10,10 @@ import BookingModal from "../../components/BookingModal/BookingModal";
 import Map from "../../components/Map/Map";
 import Heart from "../../components/Heart/Heart";
 import "./Property.css";
+import { PropertyRoute } from "../../services/apis_routes";
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const Property = () => {
   const { pathname } = useLocation();
@@ -20,12 +24,27 @@ const Property = () => {
   const [isError, setIsError] = useState(false);
   const [modalOpened, setModalOpened] = useState(false);
 
-  // Placeholder function to fetch property details from Spring Boot
+  const {getAccessTokenSilently} = useAuth0();
+
+  
   const fetchPropertyDetails = async () => {
     try {
-      // TODO: Replace with actual API call to Spring Boot backend
-      // Example: const response = await fetch(`/api/properties/${id}`);
-      // const data = await response.json();
+      const token = await getAccessTokenSilently();
+      const response = await axios.get(
+        `${PropertyRoute}/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if(response.status===200){
+        console.log(response.data);
+        setData(response.data);
+      }
+      else{
+        console.error("error fetching data");
+      }
 
       const dummyProperty = {
         id,
@@ -39,9 +58,10 @@ const Property = () => {
         image: "https://via.placeholder.com/600", // Placeholder image
       };
 
-      setData(dummyProperty);
+      // setData(dummyProperty);
       setIsLoading(false);
     } catch (error) {
+      console.error(error);
       setIsError(true);
       setIsLoading(false);
     }
